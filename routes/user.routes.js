@@ -59,7 +59,7 @@ userRouter.post("/login", async (req, res) => {
             { userID: user._id },
             process.env.authToken,
             {
-              expiresIn: 60,
+              expiresIn: "1h",
             }
           );
           const refreshToken = jwt.sign(
@@ -75,7 +75,7 @@ userRouter.post("/login", async (req, res) => {
           });
           res.cookie("authToken", authToken, {
             httpOnly: true,
-            maxAge: 1  * 60 * 1000,
+            maxAge: 1  * 60 * 60 * 1000,
           });
           res
             .status(200)

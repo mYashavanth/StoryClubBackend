@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
     // console.log({ authToken, refreshToken });
     jwt.verify(authToken, process.env.authToken, (err, user) => {
       if (user) {
-        console.log({authToken});
+        console.log({ authToken });
         next();
       } else {
         jwt.verify(refreshToken, process.env.refreshToken, (err, user) => {
@@ -14,14 +14,14 @@ const auth = (req, res, next) => {
             const newAuthToken = jwt.sign(
               { userID: user.userID },
               process.env.authToken,
-              { expiresIn: 60 }
+              { expiresIn: "1h" }
             );
             res.cookie("authToken", newAuthToken, {
               httpOnly: true,
-              maxAge: 1  * 60 * 1000,
-            })
-            console.log({refreshToken});
-            console.log({newAuthToken});
+              maxAge: 1 * 60 * 60 * 1000,
+            });
+            console.log({ refreshToken });
+            console.log({ newAuthToken });
             next();
           } else {
             res.status(401).send({ msg: "Unauthorized", err });
