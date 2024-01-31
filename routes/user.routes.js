@@ -72,10 +72,14 @@ userRouter.post("/login", async (req, res) => {
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: "none",
+            secure: true
           });
           res.cookie("authToken", authToken, {
             httpOnly: true,
             maxAge: 1  * 60 * 60 * 1000,
+            sameSite: "none",
+            secure: true
           });
           res
             .status(200)
@@ -101,8 +105,8 @@ userRouter.get("/logout", async (req, res) => {
     });
     await blacked.save().then(() => {
       res
-        .clearCookie("authToken")
-        .clearCookie("refreshToken")
+        .clearCookie("authToken", { sameSite: "none", secure: true })
+        .clearCookie("refreshToken", { sameSite: "none", secure: true })
         .status(200)
         .send({ msg: "Logout successful!" });
     }).catch((err) => {

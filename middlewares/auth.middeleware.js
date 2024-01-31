@@ -19,6 +19,8 @@ const auth = (req, res, next) => {
             res.cookie("authToken", newAuthToken, {
               httpOnly: true,
               maxAge: 1 * 60 * 60 * 1000,
+              sameSite: "none",
+              secure: true
             });
             console.log({ refreshToken });
             console.log({ newAuthToken });
