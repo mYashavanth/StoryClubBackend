@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieProvider());
 app.use(cors( {
-    origin: `http://localhost:${PORT}`,
+    origin: [`http://localhost:${PORT}`,"*"],
     credentials: true
 } ));
 

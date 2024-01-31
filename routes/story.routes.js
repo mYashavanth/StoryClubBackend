@@ -1,5 +1,5 @@
 const express = require("express");
-const auth = require("../middlewares/auth.middeleware");
+const auth = require("../middlewares/auth.middleware");
 const storyRouter = express.Router();
 
 storyRouter.use(auth);

@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const auth = (req, res, next) => {
   try {
     const { authToken, refreshToken } = req.cookies;
-    // console.log({ authToken, refreshToken });
+    console.log({ authToken, refreshToken });
     jwt.verify(authToken, process.env.authToken, (err, user) => {
       if (user) {
         console.log({ authToken });
@@ -20,7 +20,7 @@ const auth = (req, res, next) => {
               httpOnly: true,
               maxAge: 1 * 60 * 60 * 1000,
               sameSite: "none",
-              secure: true
+              // secure: true
             });
             console.log({ refreshToken });
             console.log({ newAuthToken });
