@@ -6,6 +6,7 @@ const cookieProvider = require("cookie-parser");
 const cors = require("cors");
 const userRouter = require("./routes/user.routes");
 const storyRouter = require("./routes/story.routes");
+const serverRouter = require("./verification/server");
 
 // app config
 const app = express();
@@ -21,6 +22,7 @@ app.use(cors( {
 // routes
 app.use("/user", userRouter);
 app.use("/storys", storyRouter);
+app.use("/otp", serverRouter);
 
 app.get("/", (req, res) => {
     res.send("Welcome to the StoryClub Backend Server");
